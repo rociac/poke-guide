@@ -9,10 +9,10 @@ const PokemonList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios('https://pokeapi.co/api/v2/pokemon/?limit=10');
-      const results = response.data.results;
-      results.forEach(async (pokemon) => {
-        const url = pokemon.url;
-        const data = await axios(url);
+      const responseData = response.data.results;
+      responseData.forEach(async pokemon => {
+        const pokeUrl = pokemon.url;
+        const data = await axios(pokeUrl);
         const pokeData = await data;
         dispatch({ type: 'ADD_POKEMON', pokemon: pokeData });
       });
@@ -21,10 +21,10 @@ const PokemonList = () => {
   }, [dispatch]);
 
   const pokemon = useSelector(state => state.pokemon).map(pokemon => {
-    return <Pokemon number={pokemon.data.id} name={pokemon.data.name} />
-  })
+    return <Pokemon key={pokemon.data.id} number={pokemon.data.id} name={pokemon.data.name} />
+  });
 
-  return <div>{pokemon}</div>
+  return <div>{pokemon}</div>;
 };
 
 export default PokemonList;

@@ -2,7 +2,7 @@ const ADD_POKEMON = 'ADD_POKEMON';
 
 const addPokemon = pokemon => ({
   type: ADD_POKEMON,
-  pokemon
+  pokemon,
 });
 
-export { addPokemon }
+export default addPokemon;
