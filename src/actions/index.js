@@ -1,8 +1,8 @@
 const ADD_POKEMON = 'ADD_POKEMON';
 
-const addPokemon = responseData => ({
+const addPokemon = pokemon => ({
   type: ADD_POKEMON,
-  responseData
+  pokemon
 });
 
 export { addPokemon }
