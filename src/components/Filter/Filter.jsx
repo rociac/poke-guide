@@ -1,12 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const Filter = () => {
+const Filter = ({ changeFilter }) => {
+  const types = useSelector(state => state.pokeTypes);
+  const options = types.map(type => {
+    return <option value={type.name}>{type.name}</option>;
+  });
+
   return (
     <div>
       <span>Filter by: </span>
-      <select name="Filter">
-        <option value="Fire">Fire</option>
-        <option value="Water">Water</option>
+      <select name='Filter' onChange={changeFilter}>
+        {options}
       </select>
     </div>
   );

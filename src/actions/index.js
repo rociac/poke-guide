@@ -1,5 +1,6 @@
 const ADD_POKEMON = 'ADD_POKEMON';
-const ADD_TYPES = 'ADD_TYPES';
+const ADD_POKETYPES = 'ADD_POKETYPES';
+const CHANGE_FILTER = 'CHANGE_FILTER';
 
 const addPokemon = pokemon => ({
   type: ADD_POKEMON,
@@ -7,8 +8,13 @@ const addPokemon = pokemon => ({
 });
 
 const addPokemonType = pokeTypes => ({
-  type: ADD_TYPES,
+  type: ADD_POKETYPES,
   pokeTypes,
 });
 
-export { addPokemon, addPokemonType };
+const changeFilter = filter => ({
+  type: CHANGE_FILTER,
+  filter,
+});
+
+export { addPokemon, addPokemonType, changeFilter };

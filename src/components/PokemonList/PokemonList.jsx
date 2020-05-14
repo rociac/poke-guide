@@ -1,28 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './PokemonList.module.scss';
-
+import Filter from '../Filter/Filter';
 
 const PokemonList = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const responseTypes = await axios('https://pokeapi.co/api/v2/type');
-      const types = responseTypes.data.results;
-      console.log(types);
-      dispatch({ type: 'ADD_TYPES', types: types });
-    };
-    fetchData();
-  }, [dispatch]);
-
-  const pokemon = useSelector(state => state.pokemon).map(pokemon => {
+  const handleChange = event => {
+    dispatch({ type: 'CHANGE_FILTER', filter: event.target.value });
+  };
+  const filter = useSelector(state => state.filter);
+  let pokemon = useSelector(state => state.pokemon);
+  if (filter !== 'All') {
+    pokemon = pokemon.filter(poke => poke.types.includes(filter));
+    console.log(pokemon);
+  }
+  const pokeArr = pokemon.map(pokemon => {
     return (
-      <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id} className={styles.pokeList} >
+      <Link
+        to={`/pokemon/${pokemon.id}`}
+        key={pokemon.id}
+        className={styles.pokeList}
+      >
         <div>
-          <img src={pokemon.img} alt="" />
+          <img src={pokemon.img} alt='' />
         </div>
         <div className={styles.text}>
           <span>#{pokemon.id}</span>
@@ -32,7 +33,12 @@ const PokemonList = () => {
     );
   });
 
-  return <div className={styles.container}>{pokemon}</div>;
+  return (
+    <div className={styles.container}>
+      <Filter changeFilter={handleChange} />
+      {pokeArr}
+    </div>
+  );
 };
 
 export default PokemonList;
