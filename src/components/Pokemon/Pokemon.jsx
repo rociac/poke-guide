@@ -1,22 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './Pokemon.module.scss';
+import React, { useEffect } from 'react';
+// import PropTypes from 'prop-types';
+// import styles from './Pokemon.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Pokemon = ({ name, number }) => {
+const Pokemon = ({ match }) => {
+  const { params: { id } } = match;
+
+
+
+  const pokemon = useSelector(state => state.pokemon)
+    .filter(poke => poke.id === parseInt(id, 10));
+  // pokemon.data.types.forEach(type => types.push(type.type.name));
+
   return (
-    <div className={styles.container}>
+    <>
+      <img src={pokemon[0].img} alt="" />
       <p>
-        #
-        {number}
+        {pokemon[0].name}
       </p>
-      <p>{name}</p>
-    </div>
+    </>
   );
 };
 
-Pokemon.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
-};
+// Pokemon.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   number: PropTypes.number.isRequired,
+// };
 
 export default Pokemon;
