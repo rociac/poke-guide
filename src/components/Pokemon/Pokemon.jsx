@@ -1,30 +1,28 @@
-import React, { useEffect } from 'react';
-// import PropTypes from 'prop-types';
-// import styles from './Pokemon.module.scss';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import styles from './Pokemon.module.scss';
 
-const Pokemon = ({ match }) => {
-  const { params: { id } } = match;
-
-
-
-  const pokemon = useSelector(state => state.pokemon)
-    .filter(poke => poke.id === parseInt(id, 10));
-  // pokemon.data.types.forEach(type => types.push(type.type.name));
-
-  return (
-    <>
-      <img src={pokemon[0].img} alt="" />
-      <p>
-        {pokemon[0].name}
-      </p>
-    </>
+const Pokemon = ({
+  name,
+  id,
+  image,
+  to,
+}) => (
+    <Link to={to} className={styles.container}>
+      <div className={styles.containerTop}>
+        <p className={styles.pokeNumber}>{id}</p>
+        <img src={image} alt="Pokemon" />
+      </div>
+      <p className={styles.pokeName}>{name}</p>
+    </Link>
   );
-};
 
-// Pokemon.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.number.isRequired,
-// };
+Pokemon.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
 
 export default Pokemon;

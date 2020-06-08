@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import Routes from './components/Routes/Routes';
-import Filter from './components/Filter/Filter';
+import styles from './App.module.scss';
 
 function App() {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ function App() {
     const fetchData = async () => {
       const responseTypes = await axios('https://pokeapi.co/api/v2/type');
       const pokeTypes = await responseTypes.data.results;
+      pokeTypes.unshift({ name: 'All', url: null });
       pokeTypes.forEach(async pokeType => {
         dispatch({ type: 'ADD_POKETYPES', pokeTypes: pokeType });
       });
@@ -27,20 +28,16 @@ function App() {
         } else {
           types.push(data.data.types[0].type.name);
         }
-        const poke = {
-          name: data.data.name,
-          id: data.data.id,
-          img: data.data.sprites.front_default,
-          types: types,
-        };
-        dispatch({ type: 'ADD_POKEMON', pokemon: poke });
+        data.data.types = types;
+        dispatch({ type: 'ADD_POKEMON', pokemon: data.data });
       });
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='App'>
+      <h1 className={styles.title} data-testid="title">Poke Guide</h1>
       <Routes />
     </div>
   );

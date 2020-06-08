@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import styles from './Filter.module.scss';
 
 const Filter = ({ changeFilter }) => {
   const types = useSelector(state => state.pokeTypes);
@@ -8,11 +9,13 @@ const Filter = ({ changeFilter }) => {
   });
 
   return (
-    <div>
+    <div className={styles.container}>
       <span>Filter by: </span>
-      <select name='Filter' onChange={changeFilter}>
-        {options}
-      </select>
+      <span className={styles.box}>
+        <select name='Filter' onChange={changeFilter}>
+          {options}
+        </select>
+      </span>
     </div>
   );
 };

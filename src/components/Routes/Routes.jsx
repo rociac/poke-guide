@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PokemonList from '../PokemonList/PokemonList';
-import Pokemon from '../Pokemon/Pokemon';
+import PokemonDetails from '../PokemonDetails/PokemonDetails';
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={PokemonList} />
-      <Route path="/pokemon/:id" component={Pokemon} />
+      <Route path="/pokemon/:id" component={PokemonDetails} />
     </Switch>
   );
 };
