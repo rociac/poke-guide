@@ -14,11 +14,8 @@ const PokemonList = () => {
   if (filter !== 'All') {
     pokemon = pokemon.filter(poke => poke.types.includes(filter));
   }
-  const pokeArr = pokemon.map(pokemon => {
-    return (
-      <Pokemon to={`/pokemon/${pokemon.id}`} key={pokemon.id} image={pokemon.sprites.front_default} name={pokemon.name} id={pokemon.id} />
-    );
-  });
+  const pokeArr = pokemon.map(pokemon => (
+    <Pokemon to={`/pokemon/${pokemon.id}`} key={pokemon.id} image={pokemon.sprites.front_default} name={pokemon.name} id={pokemon.id} />));
 
   return (
     <>

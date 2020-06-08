@@ -9,14 +9,14 @@ const Pokemon = ({
   image,
   to,
 }) => (
-    <Link to={to} className={styles.container}>
-      <div className={styles.containerTop}>
-        <p className={styles.pokeNumber}>{id}</p>
-        <img src={image} alt="Pokemon" />
-      </div>
-      <p className={styles.pokeName}>{name}</p>
-    </Link>
-  );
+  <Link to={to} className={styles.container}>
+    <div className={styles.containerTop}>
+      <p className={styles.pokeNumber}>{id}</p>
+      <img src={image} alt="Pokemon" />
+    </div>
+    <p className={styles.pokeName}>{name}</p>
+  </Link>
+);
 
 Pokemon.propTypes = {
   name: PropTypes.string.isRequired,
