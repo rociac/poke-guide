@@ -16,7 +16,7 @@ function App() {
         dispatch({ type: 'ADD_POKETYPES', pokeTypes: pokeType });
       });
       const response = await axios(
-        'https://pokeapi.co/api/v2/pokemon/?limit=151'
+        'https://pokeapi.co/api/v2/pokemon/?limit=151',
       );
       const responseData = response.data.results;
       responseData.forEach(async pokemon => {
@@ -36,7 +36,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className='App'>
+    <div className="App">
       <h1 className={styles.title} data-testid="title">Poke Guide</h1>
       <Routes />
     </div>
